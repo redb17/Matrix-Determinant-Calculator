@@ -1,0 +1,29 @@
+{
+  "name": "determinant-calculator",
+  "version": "1.0.0",
+  "description": "Matrix Determinant Calculator",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.9",
+    "mongodb": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "matrix",
+    "determinant",
+    "maths",
+    "calculator"
+  ],
+  "author": "redb17",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://git.heroku.com/redb17determinant.git"
+  }
+}

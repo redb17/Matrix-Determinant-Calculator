@@ -1,0 +1,220 @@
+function noFollowingSpace(x){
+  var noFoSp = '';
+  var lim = x.length - 1;
+  for(lim ; lim >=0 ; lim--){
+    if(x[lim] !== ' '){
+      break;
+    }
+  }
+  for(i = 0 ; i <= lim ; i++){
+    noFoSp += x[i];
+  }
+  return noFoSp;
+}
+
+function noExtraSpace(x){
+  var noExSp = '';
+  var sp = -1;
+  for(i = 0 ; i < x.length ; i++){
+    if(x[i] === ' '){
+      if(i - 1 !== sp){
+        noExSp += x[i];
+      }
+      sp = i;
+    }
+    else{
+      noExSp += x[i];
+    }
+  }
+  return noExSp;
+}
+
+function noReturn(x){
+  var noRet = '';
+  for(i = 0 ; i < x.length ; i++){
+    if(x[i] === '\n'){
+      noRet += ' ';
+      }
+      else{
+        noRet += x[i];
+      }
+    }
+  return noRet;
+}
+
+function calcCnt(x){
+  var cnt = 1;
+  for(i = 0 ; i < x.length ; i++){
+    if(x[i] === ' '){
+      cnt++;
+      }
+    }
+  return cnt;
+}
+
+function arrFill(order, input){
+
+  var arr = [];
+
+  var idx = 0;
+  for(i = 0; i < order; i++){
+    var col = [];
+    for(j = 0; j < order; j++){
+
+      var nxt = '';
+      while(idx < input.length && input[idx] !== ' '){
+        nxt += input[idx];
+        idx++;
+      }
+      idx++;
+
+      col.push(nxt);
+    }
+    arr.push(col);
+  }
+
+  return arr;
+}
+
+function convert(answer){
+  var deciAt = -1, eAt = -1;
+  for(i=0;i<answer.length;i++){
+    if(answer[i]==='.'){
+      deciAt = i;
+    }
+    if(answer[i]==='e'||answer[i]==='E'){
+      eAt = i;
+    }
+  }
+
+  if(deciAt>-1||eAt>-1){
+  i++;
+  while(i < answer.length){
+    exp += answer[i];
+    i++;
+  }
+  exp = parseInt(exp);
+  exp -= (eAt - deciAt - 1);
+  var ans = '';
+  for(j = 0 ; j < eAt ; j++){
+    if(answer[j] !== '.'){
+      ans += answer[j];
+    }
+  }
+  else {
+    return answer;
+  }
+}
+
+function solve(){
+  //document.getElementById("answer").innerHTML = "calculating...";
+  var input = document.getElementById("input").value;
+  input = noExtraSpace(noFollowingSpace(noReturn(input)));
+  var cnt = calcCnt(input);
+  var order = Math.sqrt(cnt);
+
+  var arr = arrFill(order, input);
+  var out = '';
+  for(i = 0; i < order; i++){
+    for(j = 0; j < order; j++){
+      out += arr[i][j]+' ';
+    }
+    out += '\n';
+  }
+  var i = 0, j = 0, answer = 0;
+  answer = deter(i, j, order, arr);
+  document.getElementById("input").value = out;
+  answer = convert('2.3e2');
+  document.getElementById("answer").innerHTML = answer;
+}
+
+var bi =[];
+var bj = [];
+var ans = 0, vi = 0, vj = 0;
+
+function deter(i, j, n, arr){
+
+  if(n == 1)
+    return arr[i][j];
+  var sign = -1, jLast = j;
+  ans = 0;
+
+  for(var m = 0 ; m < n ; m++)
+  {
+
+      sign*=-1;
+      bi.push(i);
+      while(bj.indexOf(jLast) !== -1)
+      jLast++;
+      bj.push(jLast);
+      vi=0;
+      while(bi.indexOf(vi) !== -1)
+      vi++;
+      vj=0;
+      while(bj.indexOf(vj) !== -1)
+      vj++;
+      ans+=(sign)*arr[i][jLast]*deter(vi,vj,n-1,arr);
+      if(bi.indexOf(i) !== -1){
+        bi.splice(bi.indexOf(i), 1);
+      }
+      if(bj.indexOf(jLast) !== -1){
+        bj.splice(bj.indexOf(jLast), 1);
+      }
+      jLast++;
+  }
+
+  return ans;
+}
+/*
+import java.util.Scanner;
+import java.util.*;
+class GD2
+{
+    ArrayList<Integer> bi=new ArrayList<Integer>();
+    ArrayList<Integer> bj=new ArrayList<Integer>();
+    long ans;
+    int vi,vj;
+    public static void main(String[] args)
+    {
+        System.out.println("Enter the Order of Matrix");
+        Scanner scan=new Scanner(System.in);
+        int order=scan.nextInt();
+        System.out.println("Enter the Elements Row by Row");
+        int[][] arr=new int[order][order];
+        for(int i=0;i<order;i++)
+        for(int j=0;j<order;j++)
+        arr[i][j]=scan.nextInt();
+        GD2 gd=new GD2();
+        int i=0,j=0;
+        long answer;
+        answer=gd.deter(i,j,order,arr);
+        System.out.println("Determinant is "+answer);
+    }
+    long deter(int i,int j,int n,int[][] arr)
+    {
+        if(n==1)
+        return arr[i][j];
+        int sign=-1,jLast=j;
+        ans=0;
+        for(int m=0;m<n;m++)
+        {
+            sign*=-1;
+            bi.add(i);
+            while(bj.contains(jLast))
+            jLast++;
+            bj.add(jLast);
+            vi=0;
+            while(bi.contains(vi))
+            vi++;
+            vj=0;
+            while(bj.contains(vj))
+            vj++;
+            ans+=(sign)*arr[i][jLast]*deter(vi,vj,n-1,arr);
+            bi.remove((Integer)i);
+            bj.remove((Integer)(jLast));
+            jLast++;
+        }
+        return ans;
+    }
+}
+*/

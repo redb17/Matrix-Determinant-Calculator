@@ -1,0 +1,44 @@
+h1{
+  text-align: center;
+  text-transform: uppercase;
+  color: white !important;
+}
+h5{
+  text-align: center;
+}
+#calculate:hover {
+    color: green !important;
+}
+
+body, html {
+  background-color: darkred !important;
+}
+::placeholder{
+  color: white !important;
+  text-align: justify;
+  font-style: italic;
+}
+.well{
+  border: 1px black !important;
+  border-radius: 25px !important;
+  color: white !important;
+  font-weight: bold;
+  margin-top: 2%;
+  background:black !important;
+}
+#footer{
+  position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+  color: white !important;
+  font-weight: bold;
+  background:black !important;
+}
+#input, #calculate, #answer{
+  background:black !important;
+  color: white !important;
+}
+#answer{
+  margin-top: 2%;
+}
