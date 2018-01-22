@@ -1,7 +1,7 @@
 var exp = require('express');
 var app = exp();
 var ctr = require('./controllers/control.js');
-var port = process.env.PORT || 8080
+var port = 3000;
 
 //template engine
 app.set('view engine', 'ejs');
